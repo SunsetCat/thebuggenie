@@ -475,7 +475,7 @@ EOT;
             return $users;
         }
 
-        protected function _getIssueRelatedUsers(Issue $issue, $postedby = null)
+        protected function _getIssueRelatedUsers(Issue $issue, $postedby = null, $ispublic = true)
         {
             $u_id = ($postedby instanceof User) ? $postedby->getID() : $postedby;
             $subscribers = $issue->getSubscribers();
@@ -492,6 +492,8 @@ EOT;
                     unset($users[$user->getID()]);
                 if ($user->getNotificationSetting(framework\Settings::SETTINGS_USER_NOTIFY_ONLY_IN_BOX_WHEN_ACTIVE, false, 'core')->isOn() && $user->isActive())
                     unset($users[$user->getID()]);
+                if (!$ispublic && !$user->canSeeNonPublicComments())
+                    unset($users[$user->getID()]);
             }
             $mentioned_users = $issue->getMentionedUsers();
             foreach ($mentioned_users as $user)
@@ -504,7 +506,10 @@ EOT;
                     unset($users[$user->getID()]);
                 if ($user->getNotificationSetting(framework\Settings::SETTINGS_USER_NOTIFY_ONLY_IN_BOX_WHEN_ACTIVE, false, 'core')->isOn() && $user->isActive())
                     unset($users[$user->getID()]);
+                if (!$ispublic && !$user->canSeeNonPublicComments())
+                    unset($users[$user->getID()]);
             }
+
             return $users;
         }
 
@@ -531,15 +536,16 @@ EOT;
                     $subject = '[' . $issue->getProject()->getKey() . '] ' . $issue->getIssueType()->getName() . ' ' . $issue->getFormattedIssueNo(true) . ' - ' . html_entity_decode($issue->getTitle(), ENT_COMPAT, framework\Context::getI18n()->getCharset());
                     $parameters = compact('issue');
                     $to_users = $issue->getRelatedUsers();
-                    if (!$this->getSetting(self::NOTIFY_UPDATED_SELF, framework\Context::getUser()->getID()))
+                    // if (!$this->getSetting(self::NOTIFY_UPDATED_SELF, framework\Context::getUser()->getID()))
+                    if (framework\Context::getUser()->getNotificationSetting(self::NOTIFY_UPDATED_SELF, true, 'mailing')->isOff())
                         unset($to_users[framework\Context::getUser()->getID()]);
 
                     foreach ($to_users as $uid => $user)
                     {
                         if ($user->getNotificationSetting(self::NOTIFY_NEW_ISSUES_MY_PROJECTS, true, 'mailing')->isOff() ||
                             !$issue->hasAccess($user) ||
-                            !$issue->getCategory() instanceof Category ||
-                            $user->getNotificationSetting(self::NOTIFY_NEW_ISSUES_MY_PROJECTS_CATEGORY . '_' . $issue->getCategory()->getID(), false, 'mailing')->isOff() ||
+                            // !$issue->getCategory() instanceof Category ||
+                            // $user->getNotificationSetting(self::NOTIFY_NEW_ISSUES_MY_PROJECTS_CATEGORY . '_' . $issue->getCategory()->getID(), false, 'mailing')->isOff() ||
                             ($user->getNotificationSetting(framework\Settings::SETTINGS_USER_NOTIFY_ONLY_IN_BOX_WHEN_ACTIVE, false, 'core')->isOn() && $user->isActive())) unset($to_users[$uid]);
                     }
                     $messages = $this->getTranslatedMessages('issuecreate', $parameters, $to_users, $subject);
@@ -593,7 +599,7 @@ EOT;
                             $project = $issue->getProject();
                             $subject = 'Re: [' . $issue->getProject()->getKey() . '] ' . $issue->getIssueType()->getName() . ' ' . $issue->getFormattedIssueNo(true) . ' - ' . html_entity_decode($issue->getTitle(), ENT_COMPAT, framework\Context::getI18n()->getCharset());
                             $parameters = compact('issue', 'comment');
-                            $to_users = $this->_getIssueRelatedUsers($issue, $comment->getPostedBy());
+                            $to_users = $this->_getIssueRelatedUsers($issue, $comment->getPostedBy(), $comment->isPublic());
                             $this->_markIssueSent($issue, $to_users);
                             $messages = $this->getTranslatedMessages('issuecomment', $parameters, $to_users, $subject);
                             break;
@@ -664,7 +670,8 @@ EOT;
                     $subject = 'Re: [' . $issue->getProject()->getKey() . '] ' . $issue->getIssueType()->getName() . ' ' . $issue->getFormattedIssueNo(true) . ' - ' . html_entity_decode($issue->getTitle(), ENT_COMPAT, framework\Context::getI18n()->getCharset());
                     $parameters = array('issue' => $issue, 'comment' => $event->getParameter('comment'), 'log_items' => $event->getParameter('log_items'), 'updated_by' => $event->getParameter('updated_by'));
                     $to_users = $this->_getIssueRelatedUsers($issue, $parameters['updated_by']);
-                    if (!$this->getSetting(self::NOTIFY_UPDATED_SELF, framework\Context::getUser()->getID()))
+                    // if (!$this->getSetting(self::NOTIFY_UPDATED_SELF, framework\Context::getUser()->getID()))
+                    if (framework\Context::getUser()->getNotificationSetting(self::NOTIFY_UPDATED_SELF, true, 'mailing')->isOff())
                         unset($to_users[framework\Context::getUser()->getID()]);
 
                     foreach ($to_users as $uid => $user)

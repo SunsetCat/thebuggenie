@@ -1312,7 +1312,11 @@
 
                 foreach ($project_assigned_teams as $team)
                 {
-                    $project_assigned_teams_members = array_merge($project_assigned_teams_members, $team->getMembers());
+                    // $project_assigned_teams_members = array_merge($project_assigned_teams_members, $team->getMembers());
+                    foreach ($team->getMembers() as $member_id => $member)
+                    {
+                        $project_assigned_teams_members[$member_id] = $member;
+                    }
                 }
 
                 foreach ($friends as $friend_id => $friend)

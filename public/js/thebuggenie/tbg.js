@@ -449,6 +449,9 @@ define(['prototype', 'effects', 'controls', 'scriptaculous', 'jquery', 'TweenMax
                     window.location.href = window.location.href;
                 }
             }, 1000);
+
+            // fixes for redNet
+            jQuery('.commentcontent a[href]').attr('target', '_new');
         };
 
         TBG.Core.Pollers.Callbacks.dataPoller = function (toggled_notification_id) {
@@ -6628,9 +6631,9 @@ define(['prototype', 'effects', 'controls', 'scriptaculous', 'jquery', 'TweenMax
                 TBG.Search.liveUpdate();
         };
 
-        TBG.Search.saveColumnVisibility = function () {
+        TBG.Search.saveColumnVisibility = function (force) {
             var fif = $('find_issues_form');
-            if (fif.dataset.isSaved === undefined) {
+            if (fif.dataset.isSaved === undefined || force === true) {
                 var scc = $('search_columns_container');
                 var parameters = fif.serialize();
                 TBG.Main.Helpers.ajax(scc.dataset.url, {
@@ -6644,13 +6647,14 @@ define(['prototype', 'effects', 'controls', 'scriptaculous', 'jquery', 'TweenMax
         TBG.Search.updateColumnVisibility = function (event, element) {
             event.preventDefault();
             event.stopPropagation();
+			element = element.closest('li');
             if (element.down('input').checked) {
                 TBG.Search.setFilterValue(element, false);
             } else {
                 TBG.Search.setFilterValue(element, true);
             }
             TBG.Search.toggleColumn(element.dataset.value);
-            TBG.Search.saveColumnVisibility();
+            TBG.Search.saveColumnVisibility(true);
         };
 
         TBG.Search.initializeFilters = function () {

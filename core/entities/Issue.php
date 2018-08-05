@@ -5600,7 +5600,7 @@
                 }
             }
 
-            if (isset($uids[framework\Context::getUser()->getID()])) unset($uids[framework\Context::getUser()->getID()]);
+            // if (isset($uids[framework\Context::getUser()->getID()])) unset($uids[framework\Context::getUser()->getID()]);
             $users = tables\Users::getTable()->getByUserIDs($uids);
             return $users;
         }

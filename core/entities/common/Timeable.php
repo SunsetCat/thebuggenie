@@ -83,6 +83,8 @@
          */
         public static function formatTimeableLog($time, $previous_value, $current_value, $append_minutes = false, $subtract_hours = false)
         {
+            if (! isset($previous_value) || ! isset($current_value)) return $time;
+
             if (! $append_minutes && ! $subtract_hours) return $time;
 
             $old_time = unserialize($previous_value);
