@@ -6,13 +6,16 @@
     <br>
     <h4><?php echo __('Description:');?></h4>
     <p><?php echo tbg_parse_text($issue->getDescription(), false, null, array('in_email' => true)); ?></p>
-    <br>
     <?php if ($issue->getReproductionSteps()): ?>
         <h4><?php echo __('Reproduction steps') . ':';?></h4>
         <p><?php echo tbg_parse_text($issue->getReproductionSteps()); ?></p>
         <br>
     <?php endif; ?>
-    <br>
+    <?php if ($issue->getPriority()): ?>
+        <h4><?php echo __('Priority') . ':';?></h4>
+        <p><?php echo tbg_parse_text($issue->getPriority()); ?></p>
+        <br>
+    <?php endif; ?>
     <div style="color: #888;">
         <?php echo __('Show issue:') . ' ' . link_tag($module->generateURL('viewissue', array('project_key' => $issue->getProject()->getKey(), 'issue_no' => $issue->getFormattedIssueNo()))); ?><br>
         <?php echo __('Show %project project dashboard:', array('%project' => $issue->getProject()->getName())) . ' ' . link_tag($module->generateURL('project_dashboard', array('project_key' => $issue->getProject()->getKey()))); ?><br>
