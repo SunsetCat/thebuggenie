@@ -2141,9 +2141,18 @@
             $has_associated_project = is_bool($check_global_role) ? $check_global_role : (is_numeric($target_id) && $target_id != 0 ? array_key_exists($target_id, $this->getAssociatedProjects()) : true);
             $teams = $this->getTeams();
 
-            if ($target_id != 0 && Project::getB2DBTable()->selectById($target_id) instanceof \thebuggenie\core\entities\Project)
+            /* if ($target_id != 0 && Project::getB2DBTable()->selectById($target_id) instanceof \thebuggenie\core\entities\Project)
             {
                 $teams = array_intersect_key($teams, Project::getB2DBTable()->selectById($target_id)->getAssignedTeams());
+            } */
+            // Backported from 4.1.13
+            if ($target_id != 0 && $permission_type == 'cancreateissues')
+            {
+                $project = Project::getB2DBTable()->selectById($target_id);
+                if ($project instanceof \thebuggenie\core\entities\Project)
+                {
+                    $teams = array_intersect_key($teams, $project->getAssignedTeams());
+                }
             }
             $retval = framework\Context::checkPermission($permission_type, $this->getID(), $group_id, $teams, $target_id, $module_name, $has_associated_project);
             if ($retval !== null)
