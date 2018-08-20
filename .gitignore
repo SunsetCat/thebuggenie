@@ -25,3 +25,5 @@ vendor/
 /composer.phar
 .directory
 *.swp
+.tags
+
