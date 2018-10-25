@@ -4744,6 +4744,7 @@ a.friend {
     padding: 3px;
     background-color: #F1F1F1;
     border: 1px dotted #AAA;
+    white-space: pre-wrap;
 }
 
 #viewissue_vcs_integration_commits pre {
