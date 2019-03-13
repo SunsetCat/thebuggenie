@@ -37,7 +37,9 @@
         "ext-pcre" : "*",
         "ext-Reflection" : "*",
         "lib-pcre" : "8.*",
-        "net/http" : "dev-master"
+        "net/http" : "dev-master",
+        "erusev/parsedown": "^1.7",
+        "scrivo/highlight.php": "^9.15"
     },
     "require-dev" : {
         "symfony/finder" : "~2.7",
