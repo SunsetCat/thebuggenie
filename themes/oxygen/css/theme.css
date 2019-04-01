@@ -12273,7 +12273,7 @@ li.filtervalue .hidden {
 
 .search_results tbody tr.closed td, tr.closed td {
     color: #888;
-    text-decoration: line-through;
+    /* text-decoration: line-through; */
 }
 
 .search_results tbody tr.changed {
