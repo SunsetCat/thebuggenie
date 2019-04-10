@@ -26,7 +26,7 @@
                         echo __('The issues dependency changed: %change', array('%change' => '<strong>' . $item->getText() . '</strong>'));
                         break;
                     case \thebuggenie\core\entities\tables\Log::LOG_ISSUE_UPDATE:
-                        echo image_tag('icon_info.png'); 
+                        echo image_tag('icon_info.png');
                         echo __('The issue was updated: %change', array('%change' => '<strong>' . $item->getText() . '</strong>'));
                         if (trim($item->getPreviousValue()) || trim($item->getCurrentValue()))
                         {
@@ -88,7 +88,7 @@
                         }
                         break;
                     case \thebuggenie\core\entities\tables\Log::LOG_ISSUE_ISSUETYPE:
-                        echo image_tag('icon_issuetype.png');
+                        echo image_tag('icon_issuetypes.png');
                         if ($item->hasChangeDetails())
                         {
                             $previous_value = ($item->getPreviousValue()) ? (($old_item = \thebuggenie\core\entities\Issuetype::getB2DBTable()->selectById($item->getPreviousValue())) ? __($old_item->getName()) : __('Unknown')) : __('Not determined');
@@ -217,7 +217,7 @@
                                 }
                                 echo __("%field_name changed: %previous_value => %new_value", array('%field_name' => $customdatatype->getName(), '%previous_value' => '<strong>'.$old_value.'</strong>', '%new_value' => '<strong>'.$new_value.'</strong>'));
                             }
-                            else 
+                            else
                             {
                                 echo __('Custom field changed');
                             }
