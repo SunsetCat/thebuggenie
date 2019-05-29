@@ -4,7 +4,9 @@ files/
 .settings/
 thebuggenie/.htaccess
 installed
-nbproject
+nbproject/
+.vscode/
+.sublime/
 thebuggenie.log
 web.config
 .buildpath
@@ -24,7 +26,3 @@ modules/*/vendor
 vendor/
 /composer.phar
 .directory
-*.swp
-.tags
-.remote-sync.json
-

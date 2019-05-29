@@ -28,13 +28,13 @@
 
         /**
          * An array of mentioned users
-         * 
+         *
          * @var array|\thebuggenie\core\entities\User
          */
         protected $mentions = array();
 
         protected $options = [];
-        
+
         protected function _parse_line($text, $options = [])
         {
             return $text;
@@ -111,24 +111,24 @@
             {
                 $output = $matches[0];
             }
-            
+
             return $output;
         }
-        
+
         public function getMentions()
         {
             return $this->mentions;
         }
-        
+
         public function hasMentions()
         {
             return (bool) count($this->mentions);
         }
-        
+
         public function isMentioned($user)
         {
             $user_id = ($user instanceof \thebuggenie\core\entities\User) ? $user->getID() : $user;
-            
+
             return array_key_exists($user_id, $this->mentions);
         }
 
@@ -142,6 +142,16 @@
             if (! isset($matches[1])) return $matches[0];
 
             return '<strike>'.$matches[1].'</strike>';
+        }
+
+        /**
+         * Missing in backported parser
+         */
+        public static function defaultTransform($text) {
+            $parserClass = \get_called_class();
+            $parser = new $parserClass;
+
+            return $parser->transform($text);
         }
 
     }

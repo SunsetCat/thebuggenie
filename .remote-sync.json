@@ -1,0 +1,18 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "inzynier.rednet.pl",
+  "target": "/home/www/bug.rednetproperty.com",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "fdabek",
+  "keyfile": "C:/Cygwin64/home/fdabek/.ssh/id_rsa",
+  "watch": [],
+  "transport": "scp"
+}
