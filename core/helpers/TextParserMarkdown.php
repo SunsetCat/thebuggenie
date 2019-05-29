@@ -147,7 +147,8 @@
         /**
          * Missing in backported parser
          */
-        public static function defaultTransform($text) {
+        public static function defaultTransform($text)
+        {
             $parserClass = \get_called_class();
             $parser = new $parserClass;
 
