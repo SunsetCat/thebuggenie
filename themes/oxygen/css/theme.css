@@ -17143,7 +17143,7 @@ li.header div.user_avatar {
 .commentbody.article br {
     display: block;
     content: "";
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 #issue_view #issue_details_container.collapsed img.collapser {
