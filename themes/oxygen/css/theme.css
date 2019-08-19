@@ -271,6 +271,11 @@ img.smiley {
     height: 20px;
 }
 
+del {
+    color: #666;
+    background-color: transparent;
+}
+
 /* end general styles */
 
 /* Main header area */
