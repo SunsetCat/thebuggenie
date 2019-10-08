@@ -533,7 +533,7 @@
          *
          * @return bool
          */
-        public function setCookie($key, $value, $expiration = 864000)
+        public function setCookie($key, $value, $expiration = 8640000)
         {
             $expiration = ($expiration !== null) ? intval(NOW + $expiration) : null;
             $secure = Context::getScope()->isSecure();
