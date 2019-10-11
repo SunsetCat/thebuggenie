@@ -12,7 +12,7 @@
         <meta name="description" content="The bug genie, friendly issue tracking">
         <meta name="keywords" content="thebuggenie friendly issue tracking">
         <meta name="author" content="thebuggenie.com">
-        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <title><?= ($tbg_response->hasTitle()) ? strip_tags($header_name . ' ~ ' . $tbg_response->getTitle()) : strip_tags(\thebuggenie\core\framework\Settings::getSiteHeaderName()); ?></title>
         <style>
@@ -20,36 +20,31 @@
               font-family: 'Droid Sans Mono';
               font-style: normal;
               font-weight: normal;
-              src: url('<?= $webroot; ?>fonts/droid_sans_mono.eot');
-              src: local('Droid Sans Mono'), local('DroidSansMono'), url('<?= $webroot; ?>fonts/droid_sans_mono.woff') format('woff'), url('<?= $webroot; ?>fonts/droid_sans_mono.ttf') format('truetype');
+              src: local('Droid Sans Mono'), local('DroidSansMono'), url('<?= $webroot; ?>fonts/droid_sans_mono.ttf') format('truetype');
             }
             @font-face {
               font-family: 'Open Sans';
               font-style: normal;
               font-weight: normal;
-              src: url('<?= $webroot; ?>fonts/open_sans.eot');
-              src: local('Open Sans'), local('OpenSans'), url('<?= $webroot; ?>fonts/open_sans.woff') format('woff'), url('<?= $webroot; ?>fonts/open_sans.ttf') format('truetype');
+              src: local('Open Sans'), local('OpenSans'), url('<?= $webroot; ?>fonts/open_sans.ttf') format('truetype');
             }
             @font-face {
               font-family: 'Open Sans';
               font-style: italic;
               font-weight: normal;
-              src: url('<?= $webroot; ?>fonts/open_sans_italic.eot');
-              src: local('Open Sans Italic'), local('OpenSans-Italic'), url('<?= $webroot; ?>fonts/open_sans_italic.woff') format('woff'), url('<?= $webroot; ?>fonts/open_sans_italic.ttf') format('truetype');
+              src: local('Open Sans Italic'), local('OpenSans-Italic'), url('<?= $webroot; ?>fonts/open_sans_italic.ttf') format('truetype');
             }
             @font-face {
               font-family: 'Open Sans';
               font-style: normal;
               font-weight: bold;
-              src: url('<?= $webroot; ?>fonts/open_sans_bold.eot');
-              src: local('Open Sans Bold'), local('OpenSans-Bold'), url('<?= $webroot; ?>fonts/open_sans_bold.woff') format('woff'), url('<?= $webroot; ?>fonts/open_sans_bold.ttf') format('truetype');
+              src: local('Open Sans Bold'), local('OpenSans-Bold'), url('<?= $webroot; ?>fonts/open_sans_bold.ttf') format('truetype');
             }
             @font-face {
               font-family: 'Open Sans';
               font-style: italic;
               font-weight: bold;
-              src: url('<?= $webroot; ?>fonts/open_sans_bold_italic.eot');
-              src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url('<?= $webroot; ?>fonts/open_sans_bold_italic.woff') format('woff'), url('<?= $webroot; ?>fonts/open_sans_bold_italic.ttf') format('truetype');
+              src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url('<?= $webroot; ?>fonts/open_sans_bold_italic.ttf') format('truetype');
             }
         </style>
         <link rel="shortcut icon" href="<?= (\thebuggenie\core\framework\Context::isProjectContext() && \thebuggenie\core\framework\Context::getCurrentProject()->hasSmallIcon()) ? \thebuggenie\core\framework\Context::getCurrentProject()->getSmallIconName() : (\thebuggenie\core\framework\Settings::isUsingCustomFavicon() ? \thebuggenie\core\framework\Settings::getFaviconURL() : image_url('favicon.png')); ?>">
