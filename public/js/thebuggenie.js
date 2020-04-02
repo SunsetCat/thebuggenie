@@ -14,7 +14,7 @@ define(['thebuggenie/tools', 'thebuggenie/tbg', 'domReady', 'jquery', 'mention']
                     }
                 });
                 jQuery("body").on("click", "#topmenu-container .menu_dropdown", function (e) {
-                    jQuery('#topmenu-container').toggleClass('active');
+                    // jQuery('#topmenu-container').toggleClass('active');
                 });
                 jQuery("body").on("click", ".fancydropdown", function (e) {
                     jQuery(this).toggleClass('selected');
@@ -33,7 +33,7 @@ define(['thebuggenie/tools', 'thebuggenie/tbg', 'domReady', 'jquery', 'mention']
 
                 jQuery("body").on("click", function (e) {
                     if (e.target.up('#topmenu-container') == undefined && jQuery('#topmenu-container').hasClass('active')) {
-                        jQuery('#topmenu-container').removeClass('active');
+                        // jQuery('#topmenu-container').removeClass('active');
                     }
                     if (e.target.up('#user_notifications') == undefined && e.target.up('#user_notifications_container') == undefined && jQuery('#user_notifications').hasClass('active')) {
                         jQuery('#user_notifications').removeClass('active');

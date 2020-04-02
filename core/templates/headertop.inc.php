@@ -9,7 +9,7 @@
         <?php endif; ?>
     </div>
     <?php if (!\thebuggenie\core\framework\Settings::isMaintenanceModeEnabled()): ?>
-        <div id="topmenu-container">
+        <div id="topmenu-container" class="active">
             <?php if (\thebuggenie\core\framework\Event::createNew('core', 'header_mainmenu_decider')->trigger()->getReturnValue() !== false): ?>
                 <?php require THEBUGGENIE_CORE_PATH . 'templates/headermainmenu.inc.php'; ?>
             <?php endif; ?>
