@@ -7,14 +7,16 @@
             <label for="bulk_action_selector_<?php echo $mode; ?>"><?php echo __('With selected issue(s): %action', array('%action' => '')); ?></label>
             <select name="bulk_action" id="bulk_action_selector_<?php echo $mode; ?>" onchange="TBG.Search.bulkContainerChanger('<?php echo $mode; ?>');">
                 <option value=""><?php echo __('Do nothing'); ?></option>
-                <?php if (\thebuggenie\core\framework\Context::isProjectContext()): ?>
-                    <option value="assign_milestone"><?php echo __('Assign to milestone'); ?></option>
-                <?php endif; ?>
-                <option value="set_status"><?php echo __('Set status'); ?></option>
-                <option value="set_resolution"><?php echo __('Set resolution'); ?></option>
-                <option value="set_priority"><?php echo __('Set priority'); ?></option>
-                <option value="set_category"><?php echo __('Set category'); ?></option>
-                <option value="set_severity"><?php echo __('Set severity'); ?></option>
+                <?php /* Hidden because these break our workflow ?>
+                    <?php if (\thebuggenie\core\framework\Context::isProjectContext()): ?>
+                        <option value="assign_milestone"><?php echo __('Assign to milestone'); ?></option>
+                    <?php endif; ?>
+                    <option value="set_status"><?php echo __('Set status'); ?></option>
+                    <option value="set_resolution"><?php echo __('Set resolution'); ?></option>
+                    <option value="set_priority"><?php echo __('Set priority'); ?></option>
+                    <option value="set_category"><?php echo __('Set category'); ?></option>
+                    <option value="set_severity"><?php echo __('Set severity'); ?></option>
+                <?php */ ?>
                 <option value="perform_workflow_step"><?php echo __('Choose workflow step to perform'); ?></option>
             </select>
             <?php if (\thebuggenie\core\framework\Context::isProjectContext()): ?>
