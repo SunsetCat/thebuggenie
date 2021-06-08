@@ -310,29 +310,7 @@ EOT;
 
         public function removeEmoji($text)
         {
-            $cleanText = "";
-
-            // Match Emoticons
-            $regexEmoticons = '/[\x{1F600}-\x{1F64F}]/u';
-            $cleanText = preg_replace($regexEmoticons, '?', $text);
-
-            // Match Miscellaneous Symbols and Pictographs
-            $regexSymbols = '/[\x{1F300}-\x{1F5FF}]/u';
-            $cleanText = preg_replace($regexSymbols, '?', $cleanText);
-
-            // Match Transport And Map Symbols
-            $regexTransport = '/[\x{1F680}-\x{1F6FF}]/u';
-            $cleanText = preg_replace($regexTransport, '?', $cleanText);
-
-            // Match Miscellaneous Symbols
-            $regexMisc = '/[\x{2600}-\x{26FF}]/u';
-            $cleanText = preg_replace($regexMisc, '?', $cleanText);
-
-            // Match Dingbats
-            $regexDingbats = '/[\x{2700}-\x{27BF}]/u';
-            $cleanText = preg_replace($regexDingbats, '?', $cleanText);
-
-            return $cleanText;
+            return preg_replace('/[\x{10000}-\x{FFFFD}]/u', '-?-', $text);
         }
 
         public function getTranslatedMessages($template, $parameters, $users, $subject, $subject_parameters = array())
@@ -353,6 +331,11 @@ EOT;
                     $i18n = framework\Context::getI18n();
                     $i18n->setLanguage($language);
                     $body_parts = $this->getEmailTemplates($template, $parameters);
+                    foreach ($body_parts as &$part)
+                    {
+                        $part = $this->removeEmoji($part);
+                    }
+                    unset($part);
                     $translated_subject = $this->removeEmoji($i18n->__($subject, $subject_parameters));
                     $message = $this->getSwiftMessage(html_entity_decode($translated_subject, ENT_NOQUOTES, $i18n->getCharset()), $this->removeEmoji($body_parts[0]), $this->removeEmoji($body_parts[1]));
                     foreach ($users as $user)
